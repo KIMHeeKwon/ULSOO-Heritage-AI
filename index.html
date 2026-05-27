@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ULSOO 연구팀 공식 홍보 및 성과 아카이빙 웹사이트" />
+  <title>ULSOO | Modern Heritage AI Archive</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Pretendard', 'Inter', 'Noto Sans KR', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            cyanGlow: '0 0 20px rgba(34,211,238,0.25)',
+            amberGlow: '0 0 28px rgba(245,158,11,0.28)',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+    :root {
+      --ulsoo-ink: #050a14;
+      --ulsoo-navy: #173d7a;
+      --ulsoo-deep-blue: #102852;
+      --ulsoo-teal: #249aa4;
+      --ulsoo-gold: #d6a452;
+      --ulsoo-red: #9a2b24;
+      --ulsoo-coral: #e45f42;
+      --ulsoo-cream: #fffaf0;
+    }
+
+    html {
+      background: var(--ulsoo-ink);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 15% 24%, rgba(154, 43, 36, 0.16), transparent 25rem),
+        radial-gradient(circle at 77% 18%, rgba(36, 154, 164, 0.2), transparent 30rem),
+        radial-gradient(circle at 52% 58%, rgba(214, 164, 82, 0.12), transparent 34rem),
+        linear-gradient(180deg, #050a14 0%, #07192b 48%, #050a14 100%);
+      color: var(--ulsoo-cream);
+      letter-spacing: 0;
+    }
+
+    [x-cloak] {
+      display: none !important;
+    }
+
+    .heritage-grid {
+      background-image:
+        linear-gradient(rgba(214, 164, 82, 0.09) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(36, 154, 164, 0.09) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, transparent, black 12%, black 72%, transparent);
+    }
+
+    .glass-card {
+      border: 1px solid rgba(214, 164, 82, 0.2);
+      background: rgba(7, 16, 31, 0.68);
+      backdrop-filter: blur(14px);
+      transition: transform 300ms ease, border-color 300ms ease, box-shadow 300ms ease, background 300ms ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-0.5rem);
+      border-color: rgba(36, 154, 164, 0.78);
+      box-shadow: 0 0 24px rgba(36, 154, 164, 0.24), 0 0 34px rgba(214, 164, 82, 0.12);
+    }
+
+    .window-card {
+      background:
+        linear-gradient(180deg, rgba(11, 24, 43, 0.86), rgba(5, 10, 20, 0.82)),
+        radial-gradient(circle at 100% 0%, rgba(36, 154, 164, 0.16), transparent 20rem),
+        radial-gradient(circle at 0% 100%, rgba(154, 43, 36, 0.12), transparent 17rem);
+    }
+
+    .pulse-badge {
+      animation: pulseBadge 1.9s ease-in-out infinite;
+    }
+
+    @keyframes pulseBadge {
+      0%, 100% {
+        box-shadow: 0 0 0 rgba(214, 164, 82, 0);
+        opacity: 0.9;
+      }
+      50% {
+        box-shadow: 0 0 22px rgba(214, 164, 82, 0.42);
+        opacity: 1;
+      }
+    }
+
+    .scan-line {
+      animation: scanMove 4.5s ease-in-out infinite;
+    }
+
+    @keyframes scanMove {
+      0%, 100% {
+        transform: translateY(-78px);
+        opacity: 0;
+      }
+      18%, 82% {
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(94px);
+      }
+    }
+
+    .timeline-stem {
+      background: linear-gradient(180deg, transparent, rgba(36, 154, 164, 0.78), rgba(214, 164, 82, 0.72), rgba(154, 43, 36, 0.62), transparent);
+    }
+
+    .ulsoo-logo-mark {
+      display: block;
+      overflow: visible;
+    }
+
+    .ulsoo-logo-mark .navy {
+      fill: none;
+      stroke: var(--ulsoo-navy);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .ulsoo-logo-mark .teal {
+      fill: none;
+      stroke: var(--ulsoo-teal);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .ulsoo-logo-mark .gold {
+      fill: none;
+      stroke: var(--ulsoo-gold);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .ulsoo-logo-mark .red {
+      fill: none;
+      stroke: var(--ulsoo-red);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .ulsoo-logo-mark .coral {
+      fill: none;
+      stroke: var(--ulsoo-coral);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .logo-shell {
+      border: 1px solid rgba(214, 164, 82, 0.3);
+      background: linear-gradient(145deg, rgba(255, 250, 240, 0.08), rgba(36, 154, 164, 0.08));
+      box-shadow: 0 0 32px rgba(214, 164, 82, 0.16);
+    }
+
+    .hero-logo-panel {
+      border: 1px solid rgba(214, 164, 82, 0.28);
+      background:
+        radial-gradient(circle at 48% 26%, rgba(255, 250, 240, 0.08), transparent 13rem),
+        linear-gradient(160deg, rgba(255, 250, 240, 0.06), rgba(5, 10, 20, 0.76));
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.42);
+    }
+
+    .logo-shell .ulsoo-logo-mark {
+      width: 3rem;
+      height: 3rem;
+    }
+
+    .hero-logo-panel .ulsoo-logo-mark {
+      width: min(18rem, 100%);
+      height: auto;
+      aspect-ratio: 240 / 210;
+      margin-inline: auto;
+    }
+
+    .hero-logo-panel > div {
+      display: grid;
+      min-height: 34rem;
+      place-items: center;
+      padding: 2.25rem 1.5rem;
+    }
+
+    .hero-logo-panel > div > div:nth-of-type(1) {
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    .hero-logo-panel > div > div:nth-of-type(1) > p:first-child {
+      margin: 0;
+      color: var(--ulsoo-cream);
+      font-size: clamp(3.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .hero-logo-panel > div > div:nth-of-type(1) > p:last-child {
+      max-width: 24rem;
+      margin: 0.75rem auto 0;
+      color: rgba(255, 250, 240, 0.7);
+      font-weight: 600;
+      line-height: 1.7;
+    }
+
+    .hero-logo-panel > div > div:nth-of-type(2) {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      width: 100%;
+      margin-top: 1.75rem;
+      overflow: hidden;
+      border: 1px solid rgba(214, 164, 82, 0.22);
+      border-radius: 0.25rem;
+      background: rgba(255, 250, 240, 0.08);
+      text-align: center;
+      font-size: 0.75rem;
+    }
+
+    .hero-logo-panel > div > div:nth-of-type(2) > div {
+      padding: 1rem 0.75rem;
+    }
+
+    .achievement-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .achievement-tab {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      border: 1px solid rgba(214, 164, 82, 0.18);
+      border-radius: 0.25rem;
+      background: rgba(7, 16, 31, 0.72);
+      padding: 1rem;
+      color: rgba(255, 250, 240, 0.72);
+      font-weight: 900;
+      text-align: left;
+      transition: border-color 200ms ease, background 200ms ease, color 200ms ease, transform 200ms ease;
+    }
+
+    .achievement-tab:hover,
+    .achievement-tab.is-active {
+      transform: translateY(-0.15rem);
+      border-color: rgba(36, 154, 164, 0.65);
+      background: linear-gradient(135deg, rgba(36, 154, 164, 0.18), rgba(214, 164, 82, 0.1));
+      color: var(--ulsoo-cream);
+    }
+
+    .achievement-tab span:last-child {
+      border-radius: 999px;
+      background: rgba(255, 250, 240, 0.08);
+      padding: 0.2rem 0.55rem;
+      color: #e8bb68;
+      font-size: 0.75rem;
+    }
+
+    .achievement-panel {
+      border: 1px solid rgba(214, 164, 82, 0.24);
+      border-radius: 0.25rem;
+      background:
+        radial-gradient(circle at 88% 8%, rgba(36, 154, 164, 0.14), transparent 22rem),
+        linear-gradient(160deg, rgba(7, 16, 31, 0.84), rgba(5, 10, 20, 0.78));
+      padding: 1.5rem;
+    }
+
+    .achievement-detail-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .achievement-summary {
+      border: 1px solid rgba(36, 154, 164, 0.22);
+      border-radius: 0.25rem;
+      background: rgba(255, 250, 240, 0.045);
+      padding: 1.25rem;
+    }
+
+    .achievement-summary ul {
+      margin: 1rem 0 0;
+      padding-left: 1.15rem;
+      color: rgba(255, 250, 240, 0.72);
+      line-height: 1.75;
+    }
+
+    .achievement-list {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .achievement-item {
+      border: 1px solid rgba(255, 250, 240, 0.12);
+      border-radius: 0.25rem;
+      background: rgba(5, 10, 20, 0.58);
+      padding: 1rem;
+      transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+    }
+
+    .achievement-item:hover {
+      transform: translateY(-0.25rem);
+      border-color: rgba(36, 154, 164, 0.55);
+      box-shadow: 0 0 20px rgba(36, 154, 164, 0.18);
+    }
+
+    .achievement-item.is-highlight {
+      border-color: rgba(214, 164, 82, 0.52);
+      background: linear-gradient(135deg, rgba(214, 164, 82, 0.17), rgba(7, 16, 31, 0.72));
+      box-shadow: 0 0 26px rgba(214, 164, 82, 0.16);
+    }
+
+    .achievement-date {
+      display: inline-flex;
+      border-radius: 0.25rem;
+      background: var(--ulsoo-gold);
+      padding: 0.25rem 0.7rem;
+      color: #07101f;
+      font-size: 0.75rem;
+      font-weight: 900;
+    }
+
+    .text-amber-400,
+    .text-amber-300 {
+      color: #e8bb68 !important;
+    }
+
+    .text-cyan-400,
+    .text-cyan-300,
+    .text-cyan-200,
+    .text-cyan-100 {
+      color: #5bd0d9 !important;
+    }
+
+    [class*="border-cyan-400"],
+    [class*="border-cyan-300"] {
+      border-color: rgba(36, 154, 164, 0.48) !important;
+    }
+
+    [class*="bg-cyan-400"] {
+      background-color: rgba(36, 154, 164, 0.13) !important;
+    }
+
+    [class*="bg-amber-500"],
+    [class*="bg-amber-400"] {
+      background-color: var(--ulsoo-gold) !important;
+    }
+
+    [class*="shadow-amberGlow"] {
+      box-shadow: 0 0 30px rgba(214, 164, 82, 0.24) !important;
+    }
+
+    /* CDN fallback: keeps the single HTML usable when external scripts are blocked. */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Pretendard, Inter, "Noto Sans KR", system-ui, sans-serif;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(214, 164, 82, 0.24);
+      background: rgba(5, 10, 20, 0.82);
+      backdrop-filter: blur(18px);
+    }
+
+    header nav, footer > div, section > .mx-auto {
+      width: min(100% - 2.5rem, 80rem);
+      margin-inline: auto;
+    }
+
+    header nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding-block: 1rem;
+    }
+
+    header nav > a:first-child {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 0;
+    }
+
+    header nav > a:first-child > span:first-child {
+      display: grid;
+      place-items: center;
+      width: 3.25rem;
+      height: 3.25rem;
+      border: 1px solid rgba(214, 164, 82, 0.42);
+      border-radius: 0.25rem;
+      background: rgba(255, 250, 240, 0.08);
+      color: var(--ulsoo-gold);
+      font-weight: 900;
+      box-shadow: 0 0 28px rgba(214,164,82,0.2);
+    }
+
+    header nav > a:first-child span span:first-child {
+      display: block;
+      color: var(--ulsoo-gold);
+      font-size: 1.25rem;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    header nav > a:first-child span span:last-child {
+      display: block;
+      max-width: 18rem;
+      overflow: hidden;
+      color: rgba(255, 250, 240, 0.64);
+      font-size: 0.75rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    header nav > div:nth-child(2) {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      color: rgba(255, 250, 240, 0.78);
+      font-size: 0.875rem;
+      font-weight: 700;
+    }
+
+    header nav > div:nth-child(2) a:hover {
+      color: #5bd0d9;
+    }
+
+    header > div {
+      display: none;
+    }
+
+    header button {
+      display: none;
+    }
+
+    main {
+      position: relative;
+      z-index: 10;
+    }
+
+    section {
+      padding: 6rem 1.25rem;
+    }
+
+    #home {
+      display: flex;
+      align-items: center;
+      min-height: 100vh;
+      padding-top: 6rem;
+      overflow: hidden;
+    }
+
+    #home > .mx-auto.grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(18rem, 0.92fr);
+      align-items: center;
+      gap: 3rem;
+      min-width: 0;
+    }
+
+    #home > .mx-auto.grid > * {
+      min-width: 0;
+    }
+
+    #home h1 {
+      max-width: 64rem;
+      margin: 0;
+      color: #fff;
+      font-size: clamp(2.7rem, 6vw, 4.6rem);
+      font-weight: 900;
+      line-height: 1.08;
+      overflow-wrap: anywhere;
+      word-break: keep-all;
+    }
+
+    #home h1 + p {
+      max-width: 42rem;
+      margin-top: 1.5rem;
+      color: #cbd5e1;
+      font-size: 1.18rem;
+      line-height: 1.75;
+    }
+
+    #home h1 ~ div {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2.25rem;
+    }
+
+    #home h1 ~ div a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-radius: 0.25rem;
+      padding: 1rem 1.5rem;
+      font-weight: 900;
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+
+    #home h1 ~ div a:first-child {
+      background: linear-gradient(135deg, var(--ulsoo-gold), #f2c46d);
+      color: #07101f;
+      box-shadow: 0 0 28px rgba(214,164,82,0.28);
+    }
+
+    #home h1 ~ div a:last-child {
+      border: 1px solid rgba(36, 154, 164, 0.55);
+      background: rgba(36, 154, 164, 0.14);
+      color: #dffbff;
+    }
+
+    #home h1 ~ div a:hover {
+      transform: translateY(-0.25rem);
+    }
+
+    #home .relative.mx-auto.w-full {
+      width: 100%;
+      max-width: 36rem;
+    }
+
+    #home .relative.overflow-hidden.rounded {
+      overflow: hidden;
+      border: 1px solid rgba(51, 65, 85, 0.75);
+      border-radius: 0.25rem;
+      background: rgba(2, 6, 23, 0.8);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    #home [class*="aspect-"] {
+      position: relative;
+      min-height: 20rem;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(214, 164, 82, 0.24), transparent 8rem),
+        radial-gradient(circle at 50% 60%, rgba(36, 154, 164, 0.18), transparent 13rem),
+        #050a14;
+    }
+
+    #technologies .grid, #projects .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    #people > div > .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 1.5rem;
+    }
+
+    #people article:last-of-type .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    #projects {
+      border-block: 1px solid rgba(30, 41, 59, 0.8);
+      background: rgba(2, 6, 23, 0.5);
+    }
+
+    #people {
+      border-top: 1px solid rgba(30, 41, 59, 0.8);
+      background: rgba(2, 6, 23, 0.6);
+    }
+
+    section h2 {
+      margin: 0;
+      color: #fff;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      line-height: 1.12;
+    }
+
+    section h3 {
+      margin: 0;
+      color: #fff;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    section p {
+      line-height: 1.75;
+    }
+
+    article {
+      border-radius: 0.25rem;
+    }
+
+    .glass-card {
+      padding: 1.5rem;
+    }
+
+    .glass-card p {
+      color: #cbd5e1;
+    }
+
+    .glass-card .badge, .tag-pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      border: 1px solid rgba(36, 154, 164, 0.3);
+      background: rgba(36, 154, 164, 0.12);
+      padding: 0.25rem 0.75rem;
+      color: #c9f8fb;
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
+
+    .section-kicker {
+      margin: 0 0 0.75rem;
+      color: #5bd0d9;
+      font-size: 0.875rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .section-head {
+      margin-bottom: 3rem;
+    }
+
+    #achievements .relative.mx-auto.max-w-5xl {
+      position: relative;
+      max-width: 64rem;
+      margin-inline: auto;
+    }
+
+    #achievements article {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    #achievements article:nth-of-type(odd) > .glass-card {
+      grid-column: 1;
+    }
+
+    #achievements article:nth-of-type(even) > .glass-card {
+      grid-column: 2;
+    }
+
+    footer {
+      position: relative;
+      z-index: 10;
+      border-top: 1px solid rgba(214, 164, 82, 0.2);
+      background: #050a14;
+      padding: 2.5rem 1.25rem;
+      color: rgba(255, 250, 240, 0.52);
+    }
+
+    footer > div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    @media (max-width: 900px) {
+      header nav > div:nth-child(2) {
+        display: none;
+      }
+
+      header button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        border: 1px solid #334155;
+        border-radius: 0.25rem;
+        background: rgba(15, 23, 42, 0.78);
+        color: #f8fafc;
+      }
+
+      header > div {
+        display: none;
+        border-top: 1px solid #1e293b;
+        background: rgba(2, 6, 23, 0.96);
+        padding: 0.75rem 1.25rem;
+      }
+
+      header > div a {
+        display: block;
+        border: 1px solid #1e293b;
+        border-radius: 0.25rem;
+        padding: 0.85rem 1rem;
+        color: #e2e8f0;
+        font-weight: 700;
+      }
+
+      header > div a + a {
+        margin-top: 0.5rem;
+      }
+
+      #home > .mx-auto.grid,
+      #technologies .grid,
+      #projects .grid,
+      #people > div > .grid,
+      #people article:last-of-type .grid,
+      #achievements article {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding-inline: 1rem;
+      }
+
+      #home {
+        min-height: 100vh;
+      }
+
+      #home h1 {
+        max-width: min(100%, 20rem);
+        font-size: clamp(1.8rem, 8.2vw, 2.08rem);
+        line-height: 1.16;
+        word-break: break-all;
+      }
+
+      #home p {
+        max-width: min(100%, 20rem);
+        overflow-wrap: anywhere;
+      }
+
+      #home h1 + p {
+        max-width: min(100%, 20rem);
+        font-size: 1.05rem;
+        overflow-wrap: anywhere;
+      }
+
+      #home h1 ~ div {
+        align-items: stretch;
+      }
+
+      #home h1 ~ div a {
+        justify-content: center;
+        min-width: min(100%, 13rem);
+      }
+
+      #home .relative.mx-auto.w-full {
+        max-width: 100%;
+      }
+
+      .achievement-tabs,
+      .achievement-detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #achievements article:nth-of-type(odd) > .glass-card,
+      #achievements article:nth-of-type(even) > .glass-card {
+        grid-column: auto;
+      }
+
+      footer > div {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body x-data="ulsooApp()" x-init="init()" class="min-h-screen overflow-x-hidden antialiased">
+  <svg aria-hidden="true" class="absolute h-0 w-0 overflow-hidden" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="ulsoo-logo-mark" viewBox="0 0 240 210">
+      <path fill="none" stroke="#173d7a" stroke-linecap="round" stroke-linejoin="round" stroke-width="13" d="M84 28c-14 24-7 52 18 78 23 25 47 51 44 85" />
+      <path fill="none" stroke="#9a2b24" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" d="M26 100c32 16 72 11 104-16" />
+      <path fill="none" stroke="#173d7a" stroke-linecap="round" stroke-linejoin="round" stroke-width="6" d="M27 93c30 7 58 3 90-15M37 81c23 7 45 5 70-10M45 115v48M23 151h44" />
+      <path fill="none" stroke="#249aa4" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" d="M151 78c26 10 50 6 72-19" />
+      <path fill="none" stroke="#d6a452" stroke-linecap="round" stroke-linejoin="round" stroke-width="10" d="M146 101c26-18 53-29 81-27" />
+      <path fill="none" stroke="#249aa4" stroke-linecap="round" stroke-linejoin="round" stroke-width="6" d="M179 85c19 8 36 5 50-8M182 102c19 6 35 4 48-6M189 118h32M205 67v69M190 137h31" />
+      <path fill="none" stroke="#d6a452" stroke-linecap="round" stroke-linejoin="round" stroke-width="7" d="M56 177c38-40 80-57 128-45" />
+      <path fill="none" stroke="#173d7a" stroke-linecap="round" stroke-linejoin="round" stroke-width="10" d="M87 74c14 31 25 73 24 115" />
+      <path fill="none" stroke="#9a2b24" stroke-linecap="round" stroke-linejoin="round" stroke-width="11" d="M101 120c34 16 75 27 116 11" />
+      <path fill="none" stroke="#e45f42" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" d="M137 151c34 8 61 3 82-17" />
+      <path fill="none" stroke="#249aa4" stroke-linecap="round" stroke-linejoin="round" stroke-width="11" d="M124 143c28 0 52-14 72-42" />
+      <path fill="none" stroke="#d6a452" stroke-linecap="round" stroke-linejoin="round" stroke-width="10" d="M119 129c20 5 39-4 56-27" />
+      <path fill="none" stroke="#173d7a" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" d="M96 68l25 19 17-32" />
+      <path fill="none" stroke="#9a2b24" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" d="M113 58c-13-11-5-34 15-31 13 2 20 13 17 25" />
+      <path fill="none" stroke="#d6a452" stroke-linecap="round" stroke-linejoin="round" stroke-width="6" d="M143 51c-1 18-10 31-24 39" />
+      <path fill="none" stroke="#d6a452" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" stroke-dasharray="2 7" d="M63 54c31 25 66 41 106 47M68 42c35 25 74 41 118 48M53 71c30 22 63 37 100 45M62 190c51-14 92-11 126 8M68 174c46-18 88-20 126-7M74 158c42-21 81-25 119-17" />
+      <path fill="none" stroke="#249aa4" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" stroke-dasharray="2 7" d="M145 65c31 12 59 10 83-7M150 82c30 10 56 9 78-5M138 176c35 7 64 1 87-17" />
+    </symbol>
+  </svg>
+  <div class="pointer-events-none fixed inset-0 heritage-grid opacity-55"></div>
+
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-slate-700/40 bg-slate-950/72 backdrop-blur-xl">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8" aria-label="주요 내비게이션">
+      <a href="#home" class="flex items-center gap-3" aria-label="ULSOO 홈으로 이동">
+        <span class="logo-shell grid h-14 w-14 place-items-center rounded">
+          <svg class="ulsoo-logo-mark h-12 w-12" role="img" aria-label="ULSOO 로고 마크">
+            <use href="#ulsoo-logo-mark"></use>
+          </svg>
+        </span>
+        <span>
+          <span class="block text-xl font-black text-amber-400">ULSOO</span>
+          <span class="block max-w-[13rem] truncate text-xs text-slate-400 sm:max-w-none">Ultimate Sophisticated Object Technology</span>
+        </span>
+      </a>
+
+      <div class="hidden items-center gap-7 md:flex">
+        <template x-for="item in navItems" :key="item.href">
+          <a :href="item.href" class="text-sm font-semibold text-slate-300 transition hover:text-cyan-300" x-text="item.label"></a>
+        </template>
+      </div>
+
+      <button type="button" class="inline-flex h-10 w-10 items-center justify-center rounded border border-slate-700 bg-slate-900/70 text-slate-100 md:hidden" @click="mobileOpen = !mobileOpen" :aria-expanded="mobileOpen.toString()" aria-label="모바일 메뉴 열기">
+        <i data-lucide="menu" class="h-5 w-5" x-show="!mobileOpen"></i>
+        <i data-lucide="x" class="h-5 w-5" x-show="mobileOpen" x-cloak></i>
+      </button>
+    </nav>
+
+    <div class="border-t border-slate-800 bg-slate-950/95 px-5 py-3 md:hidden" x-show="mobileOpen" x-transition x-cloak>
+      <div class="mx-auto grid max-w-7xl gap-2">
+        <template x-for="item in navItems" :key="item.href">
+          <a :href="item.href" @click="mobileOpen = false" class="rounded border border-slate-800 px-4 py-3 text-sm font-semibold text-slate-200 hover:border-cyan-400/60 hover:text-cyan-300" x-text="item.label"></a>
+        </template>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative z-10">
+    <section id="home" class="relative flex min-h-screen items-center overflow-hidden px-5 pt-24">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_55%,rgba(34,211,238,0.12),transparent_27rem)]"></div>
+      <div class="mx-auto grid w-full max-w-7xl items-center gap-12 py-16 lg:grid-cols-[1.08fr_0.92fr]">
+        <div>
+          <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-400/35 bg-cyan-400/10 px-4 py-2 text-sm font-semibold text-cyan-200">
+            <i data-lucide="sparkles" class="h-4 w-4"></i>
+            <span>2020-2026 ETRI AI & 3D Digital Heritage R&D</span>
+          </div>
+          <p class="mb-5 text-sm font-bold uppercase text-amber-400" x-text="data.teamInfo.fullName"></p>
+          <h1 class="max-w-5xl text-4xl font-black leading-tight text-white sm:text-6xl lg:text-7xl" x-text="data.teamInfo.motto"></h1>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl" x-text="data.teamInfo.englishMotto"></p>
+          <div class="mt-9 flex flex-wrap items-center gap-4">
+            <a href="#technologies" class="inline-flex items-center gap-3 rounded bg-amber-500 px-6 py-4 text-base font-extrabold text-slate-950 shadow-amberGlow transition hover:-translate-y-1 hover:bg-amber-400">
+              <i data-lucide="archive" class="h-5 w-5"></i>
+              R&D 아카이브 보기
+            </a>
+            <a href="#projects" class="inline-flex items-center gap-3 rounded border border-cyan-400/45 bg-cyan-400/10 px-6 py-4 text-base font-bold text-cyan-100 transition hover:-translate-y-1 hover:border-cyan-300">
+              <i data-lucide="box" class="h-5 w-5"></i>
+              실증사례 확인
+            </a>
+          </div>
+        </div>
+
+        <div class="relative mx-auto w-full max-w-xl">
+          <div class="absolute -inset-7 rounded-full bg-[radial-gradient(circle,rgba(214,164,82,0.18),rgba(36,154,164,0.12),transparent_70%)] blur-3xl"></div>
+          <div class="hero-logo-panel relative overflow-hidden rounded">
+            <div class="relative grid min-h-[34rem] place-items-center px-6 py-9">
+              <svg class="ulsoo-logo-mark h-72 w-72 max-w-full drop-shadow-[0_26px_42px_rgba(0,0,0,0.35)]" role="img" aria-label="ULSOO 대표 로고">
+                <use href="#ulsoo-logo-mark"></use>
+              </svg>
+              <div class="mt-4 text-center">
+                <p class="text-6xl font-black tracking-normal text-[var(--ulsoo-cream)] sm:text-7xl">ULSOO</p>
+                <p class="mx-auto mt-3 max-w-sm text-base font-semibold leading-7 text-slate-300">Ultimate Sophisticated Object Technology meets culture</p>
+              </div>
+              <div class="mt-7 grid w-full grid-cols-3 gap-px overflow-hidden rounded border border-[rgba(214,164,82,0.22)] bg-[rgba(255,250,240,0.08)] text-center text-xs">
+                <div class="px-3 py-4">
+                  <span class="block font-black text-[#5bd0d9]">90%+</span>
+                  <span class="text-slate-400">AI 진단 정확도</span>
+                </div>
+                <div class="px-3 py-4">
+                  <span class="block font-black text-[#e8bb68]">60 FPS</span>
+                  <span class="text-slate-400">WebGL Viewer</span>
+                </div>
+                <div class="px-3 py-4">
+                  <span class="block font-black text-[#c94c3a]">3D</span>
+                  <span class="text-slate-400">Digital Twin</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="technologies" class="px-5 py-24">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-12 max-w-3xl">
+          <p class="mb-3 text-sm font-black uppercase text-cyan-300">R&D Core Technologies</p>
+          <h2 class="text-3xl font-black text-white sm:text-5xl">핵심기술</h2>
+        </div>
+        <div class="grid gap-6 md:grid-cols-3">
+          <template x-for="tech in data.technologies" :key="tech.id">
+            <article class="glass-card flex min-h-[26rem] flex-col rounded p-6">
+              <div class="mb-5 flex h-12 w-12 items-center justify-center rounded border border-cyan-400/35 bg-cyan-400/10 text-cyan-300">
+                <i :data-lucide="techIcons[tech.id - 1]" class="h-6 w-6"></i>
+              </div>
+              <p class="mb-3 text-sm font-bold text-amber-400" x-text="tech.category"></p>
+              <h3 class="text-xl font-black leading-snug text-white" x-text="tech.title"></h3>
+              <p class="mt-5 flex-1 text-sm leading-7 text-slate-300" x-text="tech.desc"></p>
+              <div class="mt-6 flex flex-wrap gap-2">
+                <template x-for="keyword in tech.keywords" :key="keyword">
+                  <span class="rounded-full border border-cyan-400/25 bg-cyan-400/10 px-3 py-1 text-xs font-bold text-cyan-200" x-text="'#' + keyword"></span>
+                </template>
+              </div>
+            </article>
+          </template>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="border-y border-slate-800/80 bg-slate-950/50 px-5 py-24">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <div>
+            <p class="mb-3 text-sm font-black uppercase text-cyan-300">Validated Projects</p>
+            <h2 class="text-3xl font-black text-white sm:text-5xl">실증사례</h2>
+          </div>
+          <p class="max-w-xl text-sm leading-7 text-slate-400">국립중앙박물관, 무령왕릉 지식 그래프, WebGL 3D 가시화 엔진으로 이어지는 실제 연구 성과 기반 프로젝트입니다.</p>
+        </div>
+        <div class="grid gap-6 lg:grid-cols-3">
+          <template x-for="project in data.projects" :key="project.id">
+            <article class="glass-card window-card overflow-hidden rounded">
+              <div class="flex items-center justify-between border-b border-slate-700/80 bg-slate-900/85 px-4 py-3">
+                <div class="flex gap-2" aria-hidden="true">
+                  <span class="h-2.5 w-2.5 rounded-full bg-red-400/90"></span>
+                  <span class="h-2.5 w-2.5 rounded-full bg-amber-400/90"></span>
+                  <span class="h-2.5 w-2.5 rounded-full bg-emerald-400/90"></span>
+                </div>
+                <span class="rounded-full bg-slate-800 px-3 py-1 text-xs font-bold text-slate-300" x-text="project.tag"></span>
+              </div>
+              <div class="p-6">
+                <div class="mb-6 flex items-start justify-between gap-4">
+                  <div>
+                    <h3 class="text-2xl font-black text-white" x-text="project.title"></h3>
+                    <p class="mt-2 text-sm font-bold text-cyan-300" x-text="project.subtitle"></p>
+                  </div>
+                  <i :data-lucide="projectIcons[project.id]" class="h-7 w-7 shrink-0 text-amber-400"></i>
+                </div>
+                <p class="min-h-[10.5rem] text-sm leading-7 text-slate-300" x-text="project.desc"></p>
+                <div class="mt-6 flex items-center justify-between border-t border-slate-800 pt-5">
+                  <span class="text-xs font-bold uppercase text-slate-500" x-text="project.id"></span>
+                  <span x-show="project.hasBadge" class="pulse-badge rounded-full border border-amber-300/45 bg-amber-400/10 px-3 py-1 text-xs font-black text-amber-200" x-cloak>WebGL 데모 체험 가능</span>
+                </div>
+              </div>
+            </article>
+          </template>
+        </div>
+      </div>
+    </section>
+
+    <section id="achievements" class="px-5 py-24">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <div>
+            <p class="mb-3 text-sm font-black uppercase text-cyan-300">Research Impact Archive</p>
+            <h2 class="text-3xl font-black text-white sm:text-5xl">연구성과</h2>
+          </div>
+          <p class="max-w-xl text-sm leading-7 text-slate-400">논문, 수상, 특허·표준, 기술이전 성과를 카테고리별로 탐색할 수 있는 ULSOO 연구성과 아카이브입니다.</p>
+        </div>
+
+        <div class="achievement-tabs" role="tablist" aria-label="연구성과 카테고리">
+          <template x-for="category in achievementCategories" :key="category.key">
+            <button type="button" class="achievement-tab" :class="activeAchievement === category.key ? 'is-active' : ''" @click="activeAchievement = category.key; refreshIcons()" :aria-selected="(activeAchievement === category.key).toString()" role="tab">
+              <span class="inline-flex items-center gap-3">
+                <i :data-lucide="category.icon" class="h-5 w-5"></i>
+                <span x-text="category.label"></span>
+              </span>
+              <span x-text="data.achievements[category.key].length"></span>
+            </button>
+          </template>
+        </div>
+
+        <div class="achievement-panel">
+          <div class="achievement-detail-grid">
+            <aside class="achievement-summary">
+              <div class="mb-5 flex items-center gap-3">
+                <div class="grid h-12 w-12 place-items-center rounded border border-cyan-400/35 bg-cyan-400/10 text-cyan-300">
+                  <i :data-lucide="activeAchievementMeta.icon" class="h-6 w-6"></i>
+                </div>
+                <div>
+                  <p class="text-sm font-black uppercase text-amber-400" x-text="activeAchievementMeta.eyebrow"></p>
+                  <h3 class="text-2xl font-black text-white" x-text="activeAchievementMeta.title"></h3>
+                </div>
+              </div>
+              <p class="text-sm leading-7 text-slate-300" x-text="activeAchievementMeta.desc"></p>
+              <ul>
+                <template x-for="detail in activeAchievementMeta.details" :key="detail">
+                  <li x-text="detail"></li>
+                </template>
+              </ul>
+            </aside>
+
+            <div class="achievement-list">
+              <template x-for="item in data.achievements[activeAchievement]" :key="item.date + item.title">
+                <article class="achievement-item" :class="item.highlight ? 'is-highlight' : ''">
+                  <div class="mb-3 flex flex-wrap items-center gap-3">
+                    <span class="achievement-date" x-text="item.date"></span>
+                    <span class="text-sm font-bold text-cyan-300" x-show="item.type" x-text="item.type"></span>
+                    <span class="rounded-full border border-amber-400/30 bg-amber-400/10 px-3 py-1 text-xs font-black text-amber-300" x-show="item.highlight">대표성과</span>
+                  </div>
+                  <h4 class="text-lg font-black leading-snug text-white" x-text="item.title"></h4>
+                </article>
+              </template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="people" class="border-t border-slate-800/80 bg-slate-950/60 px-5 py-24">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-12">
+          <p class="mb-3 text-sm font-black uppercase text-cyan-300">People & Network</p>
+          <h2 class="text-3xl font-black text-white sm:text-5xl">연구진 소개</h2>
+        </div>
+
+        <div class="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <template x-for="member in data.members.slice(0, 2)" :key="member.name">
+            <article class="glass-card rounded p-6" :class="member.name === '이재호' ? 'border-amber-400/55 shadow-amberGlow' : ''">
+              <div class="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <p class="text-sm font-bold text-amber-400" x-text="member.role"></p>
+                  <h3 class="mt-2 text-3xl font-black text-white" x-text="member.name"></h3>
+                  <p class="mt-3 text-sm text-slate-400" x-text="member.inst"></p>
+                </div>
+                <button type="button" @click="copyEmail(member.email)" class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded border border-cyan-400/35 bg-cyan-400/10 text-cyan-200 transition hover:border-cyan-300 hover:bg-cyan-400/20" :aria-label="member.email + ' 복사'">
+                  <i data-lucide="copy" class="h-5 w-5"></i>
+                </button>
+              </div>
+              <div class="mt-6 flex flex-wrap gap-2">
+                <template x-for="tag in member.tags" :key="tag">
+                  <span class="rounded-full border border-slate-700 bg-slate-900 px-3 py-1 text-xs font-bold text-slate-300" x-text="tag"></span>
+                </template>
+              </div>
+              <p class="mt-5 text-sm font-semibold text-cyan-300" x-text="member.email"></p>
+            </article>
+          </template>
+        </div>
+
+        <article class="glass-card mt-6 rounded p-6">
+          <div class="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <p class="text-sm font-bold text-amber-400" x-text="network.role"></p>
+              <h3 class="mt-2 text-2xl font-black text-white" x-text="network.name"></h3>
+            </div>
+            <button type="button" @click="copyEmail(network.email)" class="inline-flex items-center gap-2 rounded border border-cyan-400/35 bg-cyan-400/10 px-4 py-3 text-sm font-bold text-cyan-200 transition hover:border-cyan-300 hover:bg-cyan-400/20">
+              <i data-lucide="copy" class="h-4 w-4"></i>
+              이메일 복사
+            </button>
+          </div>
+          <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <template x-for="org in networkOrgs" :key="org">
+              <div class="rounded border border-slate-700/80 bg-slate-900/70 px-4 py-4 text-sm font-bold text-slate-200" x-text="org"></div>
+            </template>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-2">
+            <template x-for="tag in network.tags" :key="tag">
+              <span class="rounded-full border border-cyan-400/25 bg-cyan-400/10 px-3 py-1 text-xs font-bold text-cyan-200" x-text="tag"></span>
+            </template>
+          </div>
+        </article>
+
+        <div x-show="toast" x-transition x-cloak class="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded border border-cyan-400/35 bg-slate-900 px-5 py-3 text-sm font-bold text-cyan-100 shadow-cyanGlow" x-text="toast"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="relative z-10 border-t border-slate-800 bg-slate-950 px-5 py-10">
+    <div class="mx-auto flex max-w-7xl flex-col justify-between gap-4 text-sm text-slate-500 md:flex-row md:items-center">
+      <p>ULSOO | Ultimate Sophisticated Object Technology meets culture</p>
+      <p>ETRI-led AI & 3D Digital Heritage R&D Archive</p>
+    </div>
+  </footer>
+
+  <script>
+    const ULSOO_DATA = {
+      teamInfo: {
+        name: "ULSOO",
+        fullName: "Ultimate Sophisticated Object Technology meets culture",
+        motto: "전통 문화유산, 최첨단 AI 객체 기술로 '얼쑤' 흥을 돋우다",
+        englishMotto: "Where Deep K-Heritage Meets Ultimate AI Object Technology"
+      },
+      technologies: [
+        {
+          id: 1,
+          category: "데이터 패브릭 (Data Fabric)",
+          title: "문화유산 애셋 스키마 및 메타데이터 표준화",
+          desc: "국제 표준(ISO 21127, CIDOC-CRM)과 연계된 디지털 복원 표준 메타데이터를 설계하고 대용량 통합 아카이빙 구조를 구축하여, 전국 박물관에 분산 관리되는 데이터 간의 상호 참조 및 유기적 연계를 완벽하게 지원합니다.",
+          keywords: ["CIDOC-CRM", "애셋 스키마", "데이터 아카이빙"]
+        },
+        {
+          id: 2,
+          category: "인공지능 분석 (AI Analysis)",
+          title: "지능형 손상 패턴 진단 및 분석 AI",
+          desc: "다중 스펙트럼 분광 데이터와 이미지 딥러닝을 활용하여 육안으로 식별이 불가능한 미세 균열 및 유물 밑그림을 비파괴적으로 진단합니다. 균열, 박락, 변색 등 100단계의 문화재 손상 패턴을 90% 이상의 정확도로 자동 추출합니다.",
+          keywords: ["딥러닝", "분광 데이터 분석", "손상 패턴 진단"]
+        },
+        {
+          id: 3,
+          category: "생성형 AI (Generative AI)",
+          title: "Generative AI 기반 초고해상도 복원 및 디지털 트윈",
+          desc: "Diffusion 기술 기반의 결손 부위 자동 생성 알고리즘 및 주파수 분해 오염 제거 알고리즘(FSENet)을 고도화했습니다. NeRF 및 가우시안 스플래팅 기술을 결합하여 고품질 2D 이미지를 초정밀 3D 데이터 자산으로 변환합니다.",
+          keywords: ["생성형 AI", "NeRF", "디지털 트윈", "FSENet"]
+        }
+      ],
+      projects: [
+        {
+          id: "much",
+          title: "MUCH 플랫폼",
+          subtitle: "지능형 헤리티지 공유 플랫폼",
+          desc: "문화체육관광부 지정 과제로 수행된 다목적 범용 문화유산 통합 아카이브 시스템. 국립중앙박물관 및 소속 13개 박물관을 비롯하여 국내 수많은 박물관이 원천 데이터를 생성, 가공, 공유할 수 있는 표준 플랫폼을 실증했습니다.",
+          tag: "통합 플랫폼"
+        },
+        {
+          id: "jinmyo",
+          title: "AI 도슨트 '진묘'",
+          subtitle: "RAG 기반 대화형 가상 에이전트",
+          desc: "무령왕릉 지식 그래프와 Retrieval-Augmented Generation(RAG) 기술을 융합하여 구축한 박물관 실시간 대화형 AI 도슨트 챗봇 서비스. 관람객에게 개인화된 전시 동선을 추천하고 심도 있는 유물 정보를 실시간 대화로 제공합니다.",
+          tag: "인공지능 에이전트"
+        },
+        {
+          id: "viewer",
+          title: "초실감 WebGL 3D Viewer",
+          subtitle: "고성능 애셋 웹 가시화 엔진",
+          desc: "웹 표준 웹브라우저 환경에서 별도의 플러그인 없이 FPS 60 이상의 부드러운 속도로 구동되는 초정밀 3D 문화유산 가시화 엔진. RTI(반사변환이미징) 기술을 연동하여 마우스 움직임에 따라 유물 표면의 질감과 안료 상태를 양방향으로 관찰할 수 있습니다.",
+          tag: "웹 그래픽스",
+          hasBadge: true
+        }
+      ],
+      achievements: {
+        publications: [
+          { type: "Top-tier 국제논문", title: "인공지능 컴퓨터 비전 분야 최우수 국제 학술대회 ICCV 2025 논문 게재 및 발표", date: "2025.10", highlight: true },
+          { type: "Top-tier 국제논문", title: "자연어처리(NLP) 분야 최우수 국제 학술대회 COLING 2022 논문 발표", date: "2022.10", highlight: false },
+          { type: "Top-tier 국제논문", title: "패턴인식 분야 최우수 학술대회 CVPR 2023 논문 제출 및 알고리즘 검증 완료", date: "2023", highlight: false },
+          { type: "국제 학술대회", title: "문화유산 디지털 데이터 및 AI 분석 기술 관련 국제 학술대회(SCOPUS 등재) 총 9편 발표", date: "누적", highlight: false },
+          { type: "국내 학술지", title: "딥러닝 기반 실시간 이미지 검출 시스템에 의한 한국 전통회화 객체 인식 연구 등 국내 저널/학술대회 총 21편 게재 및 발표", date: "누적", highlight: false }
+        ],
+        awards: [
+          { title: "국제 문화유산 미디어 공모전 AVICOM 2025 우수상 수상 (관계기반 데이터 시각화 기술)", date: "2025.11", highlight: true },
+          { title: "신기술융합콘텐츠 확산 및 박물관 디지털화 공로, 문화체육관광부 장관상 포상 수여", date: "2022.12", highlight: true }
+        ],
+        patents: [
+          { type: "국제특허(미국)", title: "AI-based Multi Modal Inference System for Complex Data Analysis 미국 특허 출원", date: "2025", highlight: false },
+          { type: "국제특허(미국)", title: "System for Condition-Based Image-Text Encoder Fusion for Multi-modal Relevance Analysis 미국 특허 출원", date: "2025", highlight: false },
+          { type: "국내특허", title: "문화유산 실감콘텐츠 및 데이터 패브릭 아카이브 관련 국내 특허 총 20건 출원", date: "누적", highlight: true },
+          { type: "SW 저작권", title: "딥러닝 기반 Style Transfer 소프트웨어 등 프로그램 저작권 총 9건 등록 및 초과달성", date: "누적", highlight: false },
+          { type: "단체 표준", title: "정보통신기술협회 TTA 단체 표준 채택 완료 (표준번호: TTAK.KO-10.1621)", date: "2025.03", highlight: true }
+        ],
+        business: [
+          { title: "국립중앙도서관 멀티모달 자동변환 및 메타데이터 생성 기술이전 실시 및 업무협약(MOU) 체결", date: "2026.01", highlight: true },
+          { title: "연구개발 과제 기간 내 총 21건의 대형 기술이전 및 사업화 성공 (누적 매출 계약 약 60억 원 규모 달성)", date: "종합", highlight: true },
+          { title: "문화체육관광부 지정 고품질 3D 문화유산 애셋화 목표치 대폭 초과 달성 (누적 31,022개 애셋 DB 구축)", date: "종합", highlight: false },
+          { title: "국립중앙박물관 및 산하 소속 13개 박물관 대상 MUCH 플랫폼 테스트베드 환경 구축 및 가상 챗봇 실증 완료", date: "종합", highlight: false }
+        ]
+      },
+      members: [
+        { name: "이재호", role: "연구책임자 / 책임연구원", inst: "ETRI (한국전자통신연구원)", email: "jhlee3@etri.re.kr", tags: ["총괄 리더", "객체 기술 전문", "디지털 헤리티지"] },
+        { name: "ETRI 핵심연구진", role: "Core AI & Data Research Group", inst: "주관연구개발기관", email: "contact@etri.re.kr", tags: ["데이터 패브릭", "생성형 AI", "컴퓨터 비전"] },
+        { name: "공동·위탁 연구 네트워크", role: "산·학·연 협력 생태계", inst: "문화유산기술연구소(TRIC), 에스큐아이소프트(SQISOFT), 디캐릭, 한국전통문화대학교, 중앙대학교, 고려대학교, KAIST", email: "network@ulsoo.org", tags: ["AI 보존과학 검증", "3D 디지털 트윈", "알고리즘 고도화"] }
+      ]
+    };
+
+    function ulsooApp() {
+      return {
+        data: ULSOO_DATA,
+        mobileOpen: false,
+        toast: "",
+        techIcons: ["database", "scan-search", "box"],
+        projectIcons: {
+          much: "network",
+          jinmyo: "bot",
+          viewer: "monitor-up"
+        },
+        activeAchievement: "publications",
+        achievementCategories: [
+          { key: "publications", label: "논문", icon: "book-open" },
+          { key: "awards", label: "수상", icon: "trophy" },
+          { key: "patents", label: "특허·표준", icon: "scroll-text" },
+          { key: "business", label: "사업화", icon: "briefcase" }
+        ],
+        achievementDetails: {
+          publications: {
+            eyebrow: "Publications",
+            title: "논문",
+            icon: "book-open",
+            desc: "글로벌 최고 권위의 인공지능 및 자연어처리 학회와 국내 전문 학술지에 연구 성과를 기여하여 학술적 독보성을 검증받았습니다.",
+            details: [
+              "ICCV 2025, COLING 2022, CVPR 2023 등 Top-tier AI 학술 무대에서 디지털 헤리티지 알고리즘을 검증했습니다.",
+              "SCOPUS 등재 국제 학술대회 총 9편과 국내 저널·학술대회 총 21편을 게재 및 발표했습니다.",
+              "한국 전통회화 객체 인식, e뮤지엄 데이터 시각화, 텍스트 기반 문화유산 어노테이션 시스템 연구를 포함합니다."
+            ]
+          },
+          awards: {
+            eyebrow: "Awards & Recognitions",
+            title: "수상",
+            icon: "trophy",
+            desc: "기술의 혁신성과 대한민국 문화 서비스 확산에 기여한 공로를 인정받아 정부 및 국제기구로부터 권위 있는 상을 수상했습니다.",
+            details: [
+              "문화체육관광부 장관상으로 전국 박물관 디지털화 아카이브 구축 공로를 인정받았습니다.",
+              "AVICOM 2025 우수상으로 문화유산 관계기반 데이터 시각화 기술의 글로벌 경쟁력을 입증했습니다."
+            ]
+          },
+          patents: {
+            eyebrow: "Patents & Standards",
+            title: "특허 및 표준",
+            icon: "scroll-text",
+            desc: "원천 기술 고도화를 지식재산권 자산화로 연결하고 국가 기술 장벽을 선점하기 위한 단체 표준을 제안 및 채택시켰습니다.",
+            details: [
+              "복합 데이터 분석 및 이미지-텍스트 인코더 융합 관련 미국 국제 특허 2건을 출원했습니다.",
+              "문화유산 지능형 큐레이션 플랫폼 및 3D 데이터 자동 생성 장치 등 국내 특허 총 20건을 확보했습니다.",
+              "딥러닝 기반 Style Transfer 등 SW 저작권 9건과 TTA 단체 표준 TTAK.KO-10.1621을 보유합니다."
+            ]
+          },
+          business: {
+            eyebrow: "Business & Tech Transfer",
+            title: "사업 및 기술이전",
+            icon: "briefcase",
+            desc: "실험실 안의 R&D에 머무르지 않고 대형 기술 계약과 국가 GLAM 실증 사업을 성공적으로 이끌었습니다.",
+            details: [
+              "총 21건의 대형 기술이전으로 누적 매출 계약 약 60억 원 규모를 달성했습니다.",
+              "국립중앙도서관 멀티모달 자동 변환 및 메타데이터 생성 기술이전과 MOU를 체결했습니다.",
+              "31,022개 고품질 문화유산 애셋 DB와 국립중앙박물관 및 산하 13개 박물관 MUCH 테스트베드를 구축했습니다."
+            ]
+          }
+        },
+        navItems: [
+          { label: "핵심기술", href: "#technologies" },
+          { label: "실증사례", href: "#projects" },
+          { label: "연구성과", href: "#achievements" },
+          { label: "연구진", href: "#people" }
+        ],
+        get activeAchievementMeta() {
+          return this.achievementDetails[this.activeAchievement];
+        },
+        get network() {
+          return this.data.members[2];
+        },
+        get networkOrgs() {
+          return this.network.inst.split(",").map((item) => item.trim());
+        },
+        init() {
+          this.$nextTick(() => lucide.createIcons());
+        },
+        refreshIcons() {
+          this.$nextTick(() => lucide.createIcons());
+        },
+        async copyEmail(email) {
+          try {
+            await navigator.clipboard.writeText(email);
+            this.toast = `${email} 복사 완료`;
+          } catch (error) {
+            this.toast = email;
+          }
+          window.setTimeout(() => {
+            this.toast = "";
+          }, 1800);
+        }
+      };
+    }
+
+    function renderFallbackIfNeeded() {
+      const hasRenderedData = document.querySelectorAll("#technologies article").length > 0;
+      if (window.Alpine && hasRenderedData) {
+        return;
+      }
+
+      const escapeHtml = (value) => String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+      const navLinks = [
+        { label: "핵심기술", href: "#technologies" },
+        { label: "실증사례", href: "#projects" },
+        { label: "연구성과", href: "#achievements" },
+        { label: "연구진", href: "#people" }
+      ];
+      const badgeList = (items) => items.map((item) => `<span class="tag-pill">#${escapeHtml(item)}</span>`).join("");
+
+      const desktopNav = document.querySelector("header nav > div:nth-child(2)");
+      const mobileMenu = document.querySelector("header > div");
+      const mobileMenuInner = document.querySelector("header > div > div");
+      const menuButton = document.querySelector("header button");
+      if (desktopNav) desktopNav.innerHTML = navLinks.map((item) => `<a href="${item.href}">${item.label}</a>`).join("");
+      if (mobileMenuInner) mobileMenuInner.innerHTML = navLinks.map((item) => `<a href="${item.href}">${item.label}</a>`).join("");
+      if (mobileMenu && menuButton) {
+        mobileMenu.removeAttribute("x-cloak");
+        menuButton.textContent = "메뉴";
+        menuButton.addEventListener("click", () => {
+          mobileMenu.style.display = mobileMenu.style.display === "block" ? "none" : "block";
+        });
+        mobileMenu.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            mobileMenu.style.display = "none";
+          });
+        });
+      }
+
+      const fullName = document.querySelector('[x-text="data.teamInfo.fullName"]');
+      const motto = document.querySelector("#home h1");
+      const englishMotto = document.querySelector('[x-text="data.teamInfo.englishMotto"]');
+      if (fullName) fullName.textContent = ULSOO_DATA.teamInfo.fullName;
+      if (motto) motto.textContent = ULSOO_DATA.teamInfo.motto;
+      if (englishMotto) englishMotto.textContent = ULSOO_DATA.teamInfo.englishMotto;
+
+      const techGrid = document.querySelector("#technologies .grid");
+      if (techGrid) {
+        techGrid.innerHTML = ULSOO_DATA.technologies.map((tech) => `
+          <article class="glass-card">
+            <p class="section-kicker">${escapeHtml(tech.category)}</p>
+            <h3>${escapeHtml(tech.title)}</h3>
+            <p>${escapeHtml(tech.desc)}</p>
+            <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.25rem">${badgeList(tech.keywords)}</div>
+          </article>
+        `).join("");
+      }
+
+      const projectGrid = document.querySelector("#projects .grid");
+      if (projectGrid) {
+        projectGrid.innerHTML = ULSOO_DATA.projects.map((project) => `
+          <article class="glass-card window-card">
+            <div style="display:flex;justify-content:space-between;gap:1rem;margin-bottom:1.25rem">
+              <span class="tag-pill">${escapeHtml(project.tag)}</span>
+              ${project.hasBadge ? '<span class="tag-pill pulse-badge" style="border-color:rgba(245,158,11,.45);background:rgba(245,158,11,.1);color:#fde68a">WebGL 데모 체험 가능</span>' : ""}
+            </div>
+            <h3>${escapeHtml(project.title)}</h3>
+            <p class="section-kicker" style="margin-top:.5rem">${escapeHtml(project.subtitle)}</p>
+            <p>${escapeHtml(project.desc)}</p>
+          </article>
+        `).join("");
+      }
+
+      const achievementsRoot = document.querySelector("#achievements > div");
+      if (achievementsRoot) {
+        const achievementMeta = {
+          publications: {
+            label: "논문",
+            eyebrow: "Publications",
+            title: "논문",
+            desc: "글로벌 최고 권위의 인공지능 및 자연어처리 학회와 국내 전문 학술지에 연구 성과를 기여하여 학술적 독보성을 검증받았습니다.",
+            details: ["ICCV 2025, COLING 2022, CVPR 2023 등 Top-tier AI 학술 무대에서 디지털 헤리티지 알고리즘을 검증했습니다.", "SCOPUS 등재 국제 학술대회 총 9편과 국내 저널·학술대회 총 21편을 게재 및 발표했습니다."]
+          },
+          awards: {
+            label: "수상",
+            eyebrow: "Awards & Recognitions",
+            title: "수상",
+            desc: "기술의 혁신성과 대한민국 문화 서비스 확산에 기여한 공로를 인정받아 정부 및 국제기구로부터 권위 있는 상을 수상했습니다.",
+            details: ["문화체육관광부 장관상으로 박물관 디지털화 공로를 인정받았습니다.", "AVICOM 2025 우수상으로 관계기반 데이터 시각화 기술의 글로벌 경쟁력을 입증했습니다."]
+          },
+          patents: {
+            label: "특허·표준",
+            eyebrow: "Patents & Standards",
+            title: "특허 및 표준",
+            desc: "원천 기술 고도화를 지식재산권 자산화로 연결하고 국가 기술 장벽을 선점하기 위한 단체 표준을 제안 및 채택시켰습니다.",
+            details: ["미국 국제 특허 2건, 국내 특허 총 20건, SW 저작권 9건을 확보했습니다.", "TTA 단체 표준 TTAK.KO-10.1621이 정식 채택되었습니다."]
+          },
+          business: {
+            label: "사업화",
+            eyebrow: "Business & Tech Transfer",
+            title: "사업 및 기술이전",
+            desc: "실험실 안의 R&D에 머무르지 않고 대형 기술 계약과 국가 GLAM 실증 사업을 성공적으로 이끌었습니다.",
+            details: ["총 21건의 대형 기술이전으로 누적 매출 계약 약 60억 원 규모를 달성했습니다.", "31,022개 고품질 문화유산 애셋 DB와 MUCH 테스트베드를 구축했습니다."]
+          }
+        };
+        const categoryKeys = Object.keys(ULSOO_DATA.achievements);
+        const fallbackCategory = categoryKeys[0];
+        const renderAchievementCategory = (key) => {
+          const meta = achievementMeta[key];
+          const items = ULSOO_DATA.achievements[key];
+          achievementsRoot.querySelector(".achievement-panel").innerHTML = `
+            <div class="achievement-detail-grid">
+              <aside class="achievement-summary">
+                <p class="section-kicker">${escapeHtml(meta.eyebrow)}</p>
+                <h3>${escapeHtml(meta.title)}</h3>
+                <p>${escapeHtml(meta.desc)}</p>
+                <ul>${meta.details.map((detail) => `<li>${escapeHtml(detail)}</li>`).join("")}</ul>
+              </aside>
+              <div class="achievement-list">
+                ${items.map((item) => `
+                  <article class="achievement-item ${item.highlight ? "is-highlight" : ""}">
+                    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;margin-bottom:.75rem">
+                      <span class="achievement-date">${escapeHtml(item.date)}</span>
+                      ${item.type ? `<span style="color:#5bd0d9;font-size:.875rem;font-weight:800">${escapeHtml(item.type)}</span>` : ""}
+                      ${item.highlight ? '<span class="tag-pill" style="border-color:rgba(214,164,82,.35);background:rgba(214,164,82,.12);color:#e8bb68">대표성과</span>' : ""}
+                    </div>
+                    <h4 style="margin:0;color:#fff;font-size:1.05rem;line-height:1.5">${escapeHtml(item.title)}</h4>
+                  </article>
+                `).join("")}
+              </div>
+            </div>
+          `;
+        };
+        achievementsRoot.innerHTML = `
+          <div class="section-head">
+            <p class="section-kicker">Research Impact Archive</p>
+            <h2>연구성과</h2>
+            <p style="max-width:42rem;color:#94a3b8">논문, 수상, 특허·표준, 기술이전 성과를 카테고리별로 탐색할 수 있는 ULSOO 연구성과 아카이브입니다.</p>
+          </div>
+          <div class="achievement-tabs">
+            ${categoryKeys.map((key) => `<button type="button" class="achievement-tab ${key === fallbackCategory ? "is-active" : ""}" data-achievement-key="${key}"><span>${escapeHtml(achievementMeta[key].label)}</span><span>${ULSOO_DATA.achievements[key].length}</span></button>`).join("")}
+          </div>
+          <div class="achievement-panel"></div>
+        `;
+        achievementsRoot.querySelectorAll("[data-achievement-key]").forEach((button) => {
+          button.addEventListener("click", () => {
+            achievementsRoot.querySelectorAll("[data-achievement-key]").forEach((target) => target.classList.remove("is-active"));
+            button.classList.add("is-active");
+            renderAchievementCategory(button.getAttribute("data-achievement-key"));
+          });
+        });
+        renderAchievementCategory(fallbackCategory);
+      }
+
+      const peopleRoot = document.querySelector("#people > div");
+      if (peopleRoot) {
+        const network = ULSOO_DATA.members[2];
+        const networkOrgs = network.inst.split(",").map((item) => item.trim());
+        peopleRoot.innerHTML = `
+          <div class="section-head">
+            <p class="section-kicker">People & Network</p>
+            <h2>연구진 소개</h2>
+          </div>
+          <div class="grid">
+            ${ULSOO_DATA.members.slice(0, 2).map((member) => `
+              <article class="glass-card" style="${member.name === "이재호" ? "border-color:rgba(245,158,11,.55);box-shadow:0 0 28px rgba(245,158,11,.28)" : ""}">
+                <p class="section-kicker">${escapeHtml(member.role)}</p>
+                <h3>${escapeHtml(member.name)}</h3>
+                <p>${escapeHtml(member.inst)}</p>
+                <button type="button" data-copy-email="${escapeHtml(member.email)}">이메일 복사</button>
+                <p style="color:#67e8f9;font-weight:700">${escapeHtml(member.email)}</p>
+                <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem">${member.tags.map((tag) => `<span class="tag-pill">${escapeHtml(tag)}</span>`).join("")}</div>
+              </article>
+            `).join("")}
+          </div>
+          <article class="glass-card" style="margin-top:1.5rem">
+            <p class="section-kicker">${escapeHtml(network.role)}</p>
+            <h3>${escapeHtml(network.name)}</h3>
+            <button type="button" data-copy-email="${escapeHtml(network.email)}">이메일 복사</button>
+            <div class="grid" style="margin-top:1.25rem">
+              ${networkOrgs.map((org) => `<div style="border:1px solid rgba(51,65,85,.8);border-radius:.25rem;background:rgba(15,23,42,.7);padding:1rem;font-weight:800">${escapeHtml(org)}</div>`).join("")}
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem">${network.tags.map((tag) => `<span class="tag-pill">${escapeHtml(tag)}</span>`).join("")}</div>
+          </article>
+          <div x-show="toast" x-cloak></div>
+        `;
+      }
+
+      document.querySelectorAll("[data-copy-email]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const email = button.getAttribute("data-copy-email");
+          try {
+            await navigator.clipboard.writeText(email);
+            button.textContent = "복사 완료";
+            window.setTimeout(() => {
+              button.textContent = "이메일 복사";
+            }, 1600);
+          } catch (error) {
+            button.textContent = email;
+          }
+        });
+      });
+    }
+
+    window.setTimeout(renderFallbackIfNeeded, 1200);
+  </script>
+</body>
+</html>
