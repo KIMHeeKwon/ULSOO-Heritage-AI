@@ -71,6 +71,13 @@ navItems: [
 
 ## 3. 데이터 계약 — `assets/data.js` 전문
 
+> **2026-07-08 개정 (v1.1 · i18n)**: `data.js`는 `ULSOO_DATA`(단일)에서 `ULSOO_I18N = { ko: {...}, en: {...} }`(한/영 이중)로 변경됨.
+> - 두 언어는 **동일 키 구조**이며, `journey.id`·`techFields.id`·`projects.id`·`achievements` 키는 언어 공통(전환 시 활성 상태 유지에 사용).
+> - 각 언어에 **`ui` 객체**(섹션 제목·lede·CTA·뱃지·aria 등 26키) 추가 → 정적 HTML 문구는 `x-text="ui.*"`로 바인딩.
+> - Alpine은 `lang` 상태 + `get data()/ui()/navItems()` 게터로 반응형 전환, `localStorage.ulsooLang`로 지속.
+> - 신규 문안·수치 추가 시 **ko/en 양쪽에 동일 구조로** 넣을 것. 수치·id는 양 언어 동일해야 한다.
+> 아래 원문은 KO 기준 계약값이다(EN은 동일 구조의 번역).
+
 아래 내용을 **그대로** 사용한다. (`TODO_CONFIRM` 표기는 사용자 확인 후 교체하되, 확인 전에는 표기된 대체 문안을 쓴다.)
 
 ```js

@@ -386,7 +386,13 @@
       white-space: nowrap;
     }
 
-    header nav > div:nth-child(2) {
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+    }
+
+    .nav-links {
       display: flex;
       align-items: center;
       gap: 1.75rem;
@@ -395,8 +401,30 @@
       font-weight: 700;
     }
 
-    header nav > div:nth-child(2) a:hover {
+    .nav-links a:hover {
       color: #5bd0d9;
+    }
+
+    .lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 2.4rem;
+      padding: 0 0.85rem;
+      border-radius: 0.25rem;
+      border: 1px solid rgba(214, 164, 82, 0.4);
+      background: rgba(255, 250, 240, 0.06);
+      color: var(--ulsoo-gold);
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 900;
+      cursor: pointer;
+      transition: border-color 200ms ease, color 200ms ease;
+    }
+
+    .lang-toggle:hover {
+      border-color: rgba(36, 154, 164, 0.6);
+      color: #e8bb68;
     }
 
     header nav a.is-current {
@@ -410,7 +438,7 @@
       display: none;
     }
 
-    header button {
+    .nav-burger {
       display: none;
     }
 
@@ -437,7 +465,7 @@
     }
 
     section {
-      padding: 6rem 1.25rem;
+      padding: 3.5rem 1.25rem;
     }
 
     #home {
@@ -967,7 +995,7 @@
     }
 
     .section-head {
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
     }
 
     footer {
@@ -987,11 +1015,11 @@
     }
 
     @media (max-width: 900px) {
-      header nav > div:nth-child(2) {
+      .nav-links {
         display: none;
       }
 
-      header button {
+      .nav-burger {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -1185,16 +1213,20 @@
         </span>
       </a>
 
-      <div class="hidden items-center gap-7 md:flex">
-        <template x-for="item in navItems" :key="item.href">
-          <a :href="item.href" class="text-sm font-semibold text-slate-300 transition hover:text-cyan-300" x-text="item.label"></a>
-        </template>
-      </div>
+      <div class="nav-right">
+        <div class="nav-links">
+          <template x-for="item in navItems" :key="item.href">
+            <a :href="item.href" class="text-sm font-semibold text-slate-300 transition hover:text-cyan-300" x-text="item.label"></a>
+          </template>
+        </div>
 
-      <button type="button" @click="mobileOpen = !mobileOpen" :aria-expanded="mobileOpen.toString()" aria-label="모바일 메뉴 열기">
-        <i data-lucide="menu" class="h-5 w-5" x-show="!mobileOpen"></i>
-        <i data-lucide="x" class="h-5 w-5" x-show="mobileOpen" x-cloak></i>
-      </button>
+        <button type="button" class="lang-toggle" @click="toggleLang()" :aria-label="ui.langAria" x-text="ui.langLabel">EN</button>
+
+        <button type="button" class="nav-burger" @click="mobileOpen = !mobileOpen" :aria-expanded="mobileOpen.toString()" :aria-label="ui.mobileMenuAria">
+          <i data-lucide="menu" class="h-5 w-5" x-show="!mobileOpen"></i>
+          <i data-lucide="x" class="h-5 w-5" x-show="mobileOpen" x-cloak></i>
+        </button>
+      </div>
     </nav>
 
     <div class="mobile-menu" x-show="mobileOpen" x-transition x-cloak>
@@ -1224,11 +1256,11 @@
           <div class="hero-ctas">
             <a href="#journey">
               <i data-lucide="archive" class="h-5 w-5"></i>
-              연구 여정 보기
+              <span x-text="ui.ctaJourney">연구 여정 보기</span>
             </a>
             <a href="#projects">
               <i data-lucide="box" class="h-5 w-5"></i>
-              실증사례 확인
+              <span x-text="ui.ctaProjects">실증사례 확인</span>
             </a>
           </div>
         </div>
@@ -1264,8 +1296,8 @@
       <div class="mx-auto max-w-7xl">
         <div class="section-head reveal max-w-3xl">
           <p class="section-kicker">Research Journey</p>
-          <h2>연구 여정</h2>
-          <p class="mt-4 text-sm leading-7 text-slate-400">2020년 문화유산의 디지털 기록에서 출발해, 데이터를 연결하는 지능형 플랫폼을 거쳐, 이제 훼손된 원형을 되살리는 초정밀 복원에 도전합니다. 세 개의 국가 R&D가 하나의 로드맵을 이룹니다.</p>
+          <h2 x-text="ui.journeyTitle">연구 여정</h2>
+          <p class="mt-4 text-sm leading-7 text-slate-400" x-text="ui.journeyLede">2020년 문화유산의 디지털 기록에서 출발해, 데이터를 연결하는 지능형 플랫폼을 거쳐, 이제 훼손된 원형을 되살리는 초정밀 복원에 도전합니다. 세 개의 국가 R&D가 하나의 로드맵을 이룹니다.</p>
         </div>
 
         <div class="journey-bar" role="tablist" aria-label="연구 과제 타임라인"
@@ -1279,7 +1311,7 @@
                 <span class="journey-period" x-text="j.period"></span>
                 <span class="journey-dot" :class="j.status === 'active' ? 'pulse-badge' : ''"></span>
                 <span class="journey-title" x-text="j.title"></span>
-                <span x-show="j.status === 'active'" class="rounded-full border border-amber-300/45 bg-amber-400/10 px-2 py-0.5 text-[10px] font-black text-amber-200">진행 중</span>
+                <span x-show="j.status === 'active'" class="rounded-full border border-amber-300/45 bg-amber-400/10 px-2 py-0.5 text-[10px] font-black text-amber-200" x-text="ui.inProgress">진행 중</span>
               </button>
             </div>
           </template>
@@ -1316,8 +1348,8 @@
       <div class="mx-auto max-w-7xl">
         <div class="section-head reveal max-w-3xl">
           <p class="section-kicker">R&D Core Technologies</p>
-          <h2>핵심기술</h2>
-          <p class="mt-4 text-sm leading-7 text-slate-400">한 분야의 기술이 아니라, 데이터의 획득부터 지능형 분석·복원·표준화까지 이어지는 전 주기 기술 체계를 보유합니다.</p>
+          <h2 x-text="ui.techTitle">핵심기술</h2>
+          <p class="mt-4 text-sm leading-7 text-slate-400" x-text="ui.techLede">한 분야의 기술이 아니라, 데이터의 획득부터 지능형 분석·복원·표준화까지 이어지는 전 주기 기술 체계를 보유합니다.</p>
         </div>
 
         <div class="field-tabs" role="tablist" aria-label="핵심기술 분야">
@@ -1374,9 +1406,9 @@
         <div class="section-head reveal flex flex-col justify-between gap-5 md:flex-row md:items-end">
           <div>
             <p class="section-kicker">Validated in the Field</p>
-            <h2>실증사례</h2>
+            <h2 x-text="ui.projectsTitle">실증사례</h2>
           </div>
-          <p class="max-w-xl text-sm leading-7 text-slate-400">연구실의 데모가 아닙니다. 국립중앙박물관의 상설 전시장과 대국민 서비스에서 실제 관람객을 만난 기술입니다.</p>
+          <p class="max-w-xl text-sm leading-7 text-slate-400" x-text="ui.projectsLede">연구실의 데모가 아닙니다. 국립중앙박물관의 상설 전시장과 대국민 서비스에서 실제 관람객을 만난 기술입니다.</p>
         </div>
         <div class="grid gap-6 lg:grid-cols-3">
           <template x-for="(project, pi) in data.projects" :key="project.id">
@@ -1387,7 +1419,7 @@
                      @error="$el.parentElement.style.display='none'">
                 <div class="case-overlay">
                   <i data-lucide="zoom-in" class="h-5 w-5"></i>
-                  <span>자세히 보기</span>
+                  <span x-text="ui.caseZoom">자세히 보기</span>
                 </div>
               </div>
               <div class="flex items-center justify-between border-b border-slate-700/80 bg-slate-900/85 px-4 py-3">
@@ -1409,7 +1441,7 @@
                 <p class="text-sm leading-7 text-slate-300" x-text="project.desc"></p>
                 <div class="mt-5 flex items-center justify-between border-t border-slate-800 pt-4">
                   <span class="text-xs font-bold uppercase text-slate-500" x-text="project.id"></span>
-                  <span x-show="project.hasBadge" class="pulse-badge rounded-full border border-amber-300/45 bg-amber-400/10 px-3 py-1 text-xs font-black text-amber-200" x-cloak>WebGL 데모 체험 가능</span>
+                  <span x-show="project.hasBadge" class="pulse-badge rounded-full border border-amber-300/45 bg-amber-400/10 px-3 py-1 text-xs font-black text-amber-200" x-cloak x-text="ui.badgeWebGL">WebGL 데모 체험 가능</span>
                 </div>
               </div>
             </article>
@@ -1424,9 +1456,9 @@
         <div class="section-head reveal flex flex-col justify-between gap-5 md:flex-row md:items-end">
           <div>
             <p class="section-kicker">Research Impact</p>
-            <h2>연구성과</h2>
+            <h2 x-text="ui.achTitle">연구성과</h2>
           </div>
-          <p class="max-w-xl text-sm leading-7 text-slate-400">성과를 나열하는 대신, 분야별로 무엇을 바꿨는지 보여드립니다. 숫자를 클릭하면 각 분야의 대표 성과를 확인할 수 있습니다.</p>
+          <p class="max-w-xl text-sm leading-7 text-slate-400" x-text="ui.achLede">성과를 나열하는 대신, 분야별로 무엇을 바꿨는지 보여드립니다. 숫자를 클릭하면 각 분야의 대표 성과를 확인할 수 있습니다.</p>
         </div>
 
         <div class="achievement-tabs" role="tablist" aria-label="연구성과 카테고리">
@@ -1465,7 +1497,7 @@
                     <div class="mb-3 flex flex-wrap items-center gap-3">
                       <span class="achievement-date" x-text="item.date"></span>
                       <span class="text-sm font-bold text-cyan-300" x-show="item.type" x-text="item.type"></span>
-                      <span class="rounded-full border border-amber-400/30 bg-amber-400/10 px-3 py-1 text-xs font-black text-amber-300" x-show="item.highlight">대표성과</span>
+                      <span class="rounded-full border border-amber-400/30 bg-amber-400/10 px-3 py-1 text-xs font-black text-amber-300" x-show="item.highlight" x-text="ui.highlightBadge">대표성과</span>
                     </div>
                     <h4 class="m-0 text-lg font-black leading-snug text-white" x-text="item.title"></h4>
                   </article>
@@ -1482,7 +1514,7 @@
       <div class="mx-auto max-w-7xl">
         <div class="section-head reveal">
           <p class="section-kicker">People & Network</p>
-          <h2>연구진 소개</h2>
+          <h2 x-text="ui.peopleTitle">연구진 소개</h2>
         </div>
 
         <div class="member-grid">
@@ -1552,40 +1584,48 @@
           <span class="ml-2" x-text="lightbox.subtitle"></span>
         </figcaption>
       </figure>
-      <button type="button" @click="stepLightbox(-1)" aria-label="이전 사례"
+      <button type="button" @click="stepLightbox(-1)" :aria-label="ui.lightboxPrev"
               class="absolute left-4 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-slate-600 bg-slate-900/80 text-slate-200 transition hover:border-cyan-400">‹</button>
-      <button type="button" @click="stepLightbox(1)" aria-label="다음 사례"
+      <button type="button" @click="stepLightbox(1)" :aria-label="ui.lightboxNext"
               class="absolute right-4 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-slate-600 bg-slate-900/80 text-slate-200 transition hover:border-cyan-400">›</button>
-      <button type="button" @click="closeLightbox()" aria-label="닫기"
+      <button type="button" @click="closeLightbox()" :aria-label="ui.lightboxClose"
               class="absolute right-5 top-5 grid h-10 w-10 place-items-center rounded border border-slate-600 bg-slate-900/80 text-slate-200">✕</button>
     </div>
   </template>
 
-  <button type="button" class="to-top" aria-label="맨 위로" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+  <button type="button" class="to-top" :aria-label="ui.toTop" aria-label="맨 위로" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
   <footer>
     <div class="mx-auto flex max-w-7xl flex-col justify-between gap-4 text-sm text-slate-500 md:flex-row md:items-center">
       <p>ULSOO | Ultimate Sophisticated Object Technology meets culture</p>
-      <p>ETRI 초실감메타버스연구소 · AI & 3D Digital Heritage R&D</p>
+      <p x-text="ui.footerRight">ETRI 초실감메타버스연구소 · AI & 3D Digital Heritage R&D</p>
     </div>
   </footer>
 
   <script>
     const REDUCE_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    /* ── 글로벌 스크롤 리빌 (vanilla — 폴백 모드에서도 동작) ── */
+    /* ── 글로벌 스크롤 리빌 (vanilla, 스크롤 위치 기반 — 폴백/IO 미발화 환경에서도 동작) ── */
     function initReveals() {
-      const els = document.querySelectorAll(".reveal:not(.is-in)");
-      if (!("IntersectionObserver" in window) || REDUCE_MOTION) {
-        els.forEach(el => el.classList.add("is-in"));
+      const pending = document.querySelectorAll(".reveal:not(.is-in)");
+      if (!pending.length) return;
+      if (REDUCE_MOTION) {
+        pending.forEach(el => el.classList.add("is-in"));
         return;
       }
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
+      const reveal = () => {
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        document.querySelectorAll(".reveal:not(.is-in)").forEach(el => {
+          const r = el.getBoundingClientRect();
+          if (r.top < vh * 0.92 && r.bottom > 0) el.classList.add("is-in");
         });
-      }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
-      els.forEach(el => io.observe(el));
+      };
+      reveal();
+      if (!window.__revealScroll) {
+        window.__revealScroll = true;
+        window.addEventListener("scroll", reveal, { passive: true });
+        window.addEventListener("resize", reveal, { passive: true });
+      }
     }
 
     /* ── 스크롤스파이 ── */
@@ -1631,17 +1671,13 @@
 
     function ulsooApp() {
       return {
-        data: ULSOO_DATA,
+        lang: "ko",
         mobileOpen: false,
         toast: "",
         copied: "",
-        navItems: [
-          { label: "연구 여정", href: "#journey" },
-          { label: "핵심기술", href: "#technologies" },
-          { label: "실증사례", href: "#projects" },
-          { label: "연구성과", href: "#achievements" },
-          { label: "연구진", href: "#people" }
-        ],
+        get data() { return ULSOO_I18N[this.lang]; },
+        get ui() { return ULSOO_I18N[this.lang].ui; },
+        get navItems() { return ULSOO_I18N[this.lang].ui.nav; },
         activeJourney: "ulsoo",
         activeField: "ai",
         openTech: 0,
@@ -1708,6 +1744,12 @@
             requestAnimationFrame(tick);
           });
         },
+        toggleLang() {
+          this.lang = this.lang === "ko" ? "en" : "ko";
+          localStorage.setItem("ulsooLang", this.lang);
+          document.documentElement.setAttribute("lang", this.lang);
+          this.refreshIcons();
+        },
         setJourney(id) { this.activeJourney = id; this.refreshIcons(); },
         stepJourney(d) {
           const ids = this.data.journey.map(j => j.id);
@@ -1732,7 +1774,7 @@
         async copyEmail(email) {
           try {
             await navigator.clipboard.writeText(email);
-            this.toast = `${email} 복사 완료`;
+            this.toast = this.lang === "en" ? `Copied ${email}` : `${email} 복사 완료`;
             this.copied = email;
           } catch (error) {
             this.toast = email;
@@ -1743,21 +1785,30 @@
           }, 1800);
         },
         init() {
+          this.lang = localStorage.getItem("ulsooLang") === "en" ? "en" : "ko";
+          document.documentElement.setAttribute("lang", this.lang);
           this.$nextTick(() => {
             lucide.createIcons();
             initReveals();
             initScrollSpy();
           });
-          const observeOnce = (sel, cb, threshold) => {
+          // 카운트업 트리거는 스크롤 위치 기반(IO 미발화 환경에서도 확실히 동작)
+          const inView = (sel, ratio) => {
             const el = document.querySelector(sel);
-            if (el && "IntersectionObserver" in window) {
-              new IntersectionObserver((es, obs) => {
-                if (es[0].isIntersecting) { cb(); obs.disconnect(); }
-              }, { threshold }).observe(el);
-            } else { cb(); }
+            if (!el) return false;
+            const r = el.getBoundingClientRect();
+            const vh = window.innerHeight || document.documentElement.clientHeight;
+            if (r.height <= 0) return false;
+            const shown = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
+            return shown / Math.min(r.height, vh) >= ratio;
           };
-          observeOnce(".hero-logo-panel", () => this.startKpiCountup(), 0.3);
-          observeOnce("#achievements", () => this.startAchvCountup(), 0.3);
+          const checkCountups = () => {
+            if (!this.kpiDone && inView(".hero-logo-panel", 0.3)) this.startKpiCountup();
+            if (!this.achvDone && inView("#achievements", 0.2)) this.startAchvCountup();
+            if (this.kpiDone && this.achvDone) window.removeEventListener("scroll", checkCountups);
+          };
+          window.addEventListener("scroll", checkCountups, { passive: true });
+          this.$nextTick(checkCountups);
         }
       };
     }
@@ -1769,30 +1820,27 @@
         return;
       }
 
-      const D = ULSOO_DATA;
+      const LANG = localStorage.getItem("ulsooLang") === "en" ? "en" : "ko";
+      document.documentElement.setAttribute("lang", LANG);
+      const D = ULSOO_I18N[LANG];
+      const UI = D.ui;
       const escapeHtml = (value) => String(value)
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
-      const navLinks = [
-        { label: "연구 여정", href: "#journey" },
-        { label: "핵심기술", href: "#technologies" },
-        { label: "실증사례", href: "#projects" },
-        { label: "연구성과", href: "#achievements" },
-        { label: "연구진", href: "#people" }
-      ];
+      const navLinks = UI.nav;
 
-      const desktopNav = document.querySelector("header nav > div:nth-child(2)");
+      const desktopNav = document.querySelector(".nav-links");
       const mobileMenu = document.querySelector("header > div.mobile-menu");
       const mobileMenuInner = document.querySelector("header > div.mobile-menu > div");
-      const menuButton = document.querySelector("header button");
-      if (desktopNav) desktopNav.innerHTML = navLinks.map((item) => `<a href="${item.href}">${item.label}</a>`).join("");
-      if (mobileMenuInner) mobileMenuInner.innerHTML = navLinks.map((item) => `<a href="${item.href}">${item.label}</a>`).join("");
+      const menuButton = document.querySelector(".nav-burger");
+      if (desktopNav) desktopNav.innerHTML = navLinks.map((item) => `<a href="${item.href}">${escapeHtml(item.label)}</a>`).join("");
+      if (mobileMenuInner) mobileMenuInner.innerHTML = navLinks.map((item) => `<a href="${item.href}">${escapeHtml(item.label)}</a>`).join("");
       if (mobileMenu && menuButton) {
         mobileMenu.removeAttribute("x-cloak");
-        menuButton.textContent = "메뉴";
+        menuButton.textContent = "☰";
         menuButton.addEventListener("click", () => {
           mobileMenu.style.display = mobileMenu.style.display === "block" ? "none" : "block";
         });
@@ -1802,6 +1850,25 @@
           });
         });
       }
+
+      // 언어 토글 (폴백: localStorage 설정 후 리로드)
+      const langBtn = document.querySelector(".lang-toggle");
+      if (langBtn) {
+        langBtn.textContent = UI.langLabel;
+        langBtn.setAttribute("aria-label", UI.langAria);
+        langBtn.addEventListener("click", () => {
+          localStorage.setItem("ulsooLang", LANG === "ko" ? "en" : "ko");
+          location.reload();
+        });
+      }
+
+      // Hero CTA + 푸터
+      const ctaJ = document.querySelector('#home a[href="#journey"] span');
+      const ctaP = document.querySelector('#home a[href="#projects"] span');
+      if (ctaJ) ctaJ.textContent = UI.ctaJourney;
+      if (ctaP) ctaP.textContent = UI.ctaProjects;
+      const footerRight = document.querySelector("footer > div p:last-child");
+      if (footerRight) footerRight.textContent = UI.footerRight;
 
       // Hero
       const badge = document.querySelector('#home [x-text="data.teamInfo.badge"]');
@@ -1830,14 +1897,14 @@
         journeyRoot.innerHTML = `
           <div class="section-head">
             <p class="section-kicker">Research Journey</p>
-            <h2>연구 여정</h2>
-            <p style="max-width:42rem;color:#94a3b8">2020년 문화유산의 디지털 기록에서 출발해, 데이터를 연결하는 지능형 플랫폼을 거쳐, 이제 훼손된 원형을 되살리는 초정밀 복원에 도전합니다.</p>
+            <h2>${escapeHtml(UI.journeyTitle)}</h2>
+            <p style="max-width:42rem;color:#94a3b8">${escapeHtml(UI.journeyLede)}</p>
           </div>
           ${D.journey.map((j) => `
             <div class="achievement-panel" style="margin-bottom:2rem">
               <p class="journey-verb" style="margin:0">${escapeHtml(j.verb)}</p>
               <h3 style="margin-top:.5rem">${escapeHtml(j.title)} — ${escapeHtml(j.subtitle)}</h3>
-              <p style="color:#94a3b8;font-size:.8rem;font-weight:700">${escapeHtml(j.funder)} | ${escapeHtml(j.period)}${j.status === "active" ? " · 진행 중" : ""}</p>
+              <p style="color:#94a3b8;font-size:.8rem;font-weight:700">${escapeHtml(j.funder)} | ${escapeHtml(j.period)}${j.status === "active" ? " · " + escapeHtml(UI.inProgress) : ""}</p>
               <p style="color:#cbd5e1">${escapeHtml(j.mission)}</p>
               <ul style="color:#cbd5e1;line-height:1.9;padding-left:1.2rem">${j.highlights.map((h) => `<li>${escapeHtml(h)}</li>`).join("")}</ul>
               <p style="color:#94a3b8;font-size:.8rem;font-weight:700">${escapeHtml(j.partners)}</p>
@@ -1852,7 +1919,7 @@
         techRoot.innerHTML = `
           <div class="section-head">
             <p class="section-kicker">R&D Core Technologies</p>
-            <h2>핵심기술</h2>
+            <h2>${escapeHtml(UI.techTitle)}</h2>
           </div>
           ${D.techFields.map((f) => `
             <div class="achievement-panel" style="margin-bottom:2rem">
@@ -1873,16 +1940,20 @@
         `;
       }
 
-      // 실증사례 — 6카드
+      // 실증사례 — 헤더(정적) + 6카드
+      const projTitle = document.querySelector('#projects [x-text="ui.projectsTitle"]');
+      if (projTitle) projTitle.textContent = UI.projectsTitle;
+      const projLede = document.querySelector('#projects [x-text="ui.projectsLede"]');
+      if (projLede) projLede.textContent = UI.projectsLede;
       const projectGrid = document.querySelector("#projects .grid");
       if (projectGrid) {
         projectGrid.innerHTML = D.projects.map((project) => `
           <article class="glass-card window-card" style="padding:0;overflow:hidden">
-            <div class="case-thumb" style="cursor:default"><img src="${escapeHtml(project.img)}" alt="${escapeHtml(project.title)} 실증 이미지" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+            <div class="case-thumb" style="cursor:default"><img src="${escapeHtml(project.img)}" alt="${escapeHtml(project.title)}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
             <div style="padding:1.5rem">
               <div style="display:flex;justify-content:space-between;gap:1rem;margin-bottom:1rem;flex-wrap:wrap">
                 <span class="tag-pill">${escapeHtml(project.tag)}</span>
-                ${project.hasBadge ? '<span class="tag-pill pulse-badge" style="border-color:rgba(214,164,82,.45);background:rgba(214,164,82,.12);color:#e8bb68">WebGL 데모 체험 가능</span>' : ""}
+                ${project.hasBadge ? `<span class="tag-pill pulse-badge" style="border-color:rgba(214,164,82,.45);background:rgba(214,164,82,.12);color:#e8bb68">${escapeHtml(UI.badgeWebGL)}</span>` : ""}
               </div>
               <h3>${escapeHtml(project.title)}</h3>
               <p class="section-kicker" style="margin-top:.5rem">${escapeHtml(project.subtitle)}</p>
@@ -1898,7 +1969,7 @@
         achievementsRoot.innerHTML = `
           <div class="section-head">
             <p class="section-kicker">Research Impact</p>
-            <h2>연구성과</h2>
+            <h2>${escapeHtml(UI.achTitle)}</h2>
           </div>
           <div class="achievement-tabs">
             ${D.achievementSummary.map((s) => `
@@ -1922,7 +1993,7 @@
                       <div style="display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;margin-bottom:.75rem">
                         <span class="achievement-date">${escapeHtml(item.date)}</span>
                         ${item.type ? `<span style="color:#5bd0d9;font-size:.875rem;font-weight:800">${escapeHtml(item.type)}</span>` : ""}
-                        ${item.highlight ? '<span class="tag-pill" style="border-color:rgba(214,164,82,.35);background:rgba(214,164,82,.12);color:#e8bb68">대표성과</span>' : ""}
+                        ${item.highlight ? `<span class="tag-pill" style="border-color:rgba(214,164,82,.35);background:rgba(214,164,82,.12);color:#e8bb68">${escapeHtml(UI.highlightBadge)}</span>` : ""}
                       </div>
                       <h4 style="margin:0;color:#fff;font-size:1.05rem;line-height:1.5">${escapeHtml(item.title)}</h4>
                     </article>
@@ -1941,14 +2012,14 @@
         peopleRoot.innerHTML = `
           <div class="section-head">
             <p class="section-kicker">People & Network</p>
-            <h2>연구진 소개</h2>
+            <h2>${escapeHtml(UI.peopleTitle)}</h2>
           </div>
           <div class="member-grid">
             ${D.members.map((member, mi) => `
               <article class="glass-card member-card" style="${mi === 0 ? "border-color:rgba(214,164,82,.55);box-shadow:0 0 28px rgba(214,164,82,.24)" : ""}">
                 <div class="member-avatar">
                   <div class="member-initial">${escapeHtml(member.name.charAt(0))}</div>
-                  <img src="${escapeHtml(member.img)}" alt="${escapeHtml(member.name)} 프로필" loading="lazy" onerror="this.remove()">
+                  <img src="${escapeHtml(member.img)}" alt="${escapeHtml(member.name)}" loading="lazy" onerror="this.remove()">
                 </div>
                 <h3 style="margin-top:1rem">${escapeHtml(member.name)}</h3>
                 <p style="margin:.25rem 0 0;color:#e8bb68;font-size:.875rem;font-weight:700">${escapeHtml(member.role)}</p>
@@ -1956,7 +2027,7 @@
                 <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem">${member.tags.map((tag) => `<span class="tag-pill">${escapeHtml(tag)}</span>`).join("")}</div>
                 ${member.email !== "TODO_CONFIRM" ? `
                   <p style="margin:.9rem 0 0;color:#5bd0d9;font-size:.75rem;font-weight:700">${escapeHtml(member.email)}</p>
-                  <button type="button" data-copy-email="${escapeHtml(member.email)}" style="margin-top:.5rem;border:1px solid rgba(36,154,164,.35);background:rgba(36,154,164,.12);color:#c9f8fb;border-radius:.25rem;padding:.4rem .8rem;font-size:.75rem;font-weight:800;cursor:pointer">이메일 복사</button>
+                  <button type="button" data-copy-email="${escapeHtml(member.email)}" style="margin-top:.5rem;border:1px solid rgba(36,154,164,.35);background:rgba(36,154,164,.12);color:#c9f8fb;border-radius:.25rem;padding:.4rem .8rem;font-size:.75rem;font-weight:800;cursor:pointer">${escapeHtml(UI.copyBtn)}</button>
                 ` : ""}
               </article>
             `).join("")}
@@ -1977,9 +2048,9 @@
           const email = button.getAttribute("data-copy-email");
           try {
             await navigator.clipboard.writeText(email);
-            button.textContent = "복사 완료";
+            button.textContent = UI.copyDone;
             window.setTimeout(() => {
-              button.textContent = "이메일 복사";
+              button.textContent = UI.copyBtn;
             }, 1600);
           } catch (error) {
             button.textContent = email;

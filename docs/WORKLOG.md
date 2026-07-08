@@ -137,3 +137,18 @@
 - 박찬우: 연구원 → **책임연구원** / 백서현: 연구원 → **박사후연구원(Post-Doc)** (사용자 확정)
 - data.js·IMPLEMENTATION_SPEC §3·CONTENT_SPEC §7 동기 갱신, 직급 TODO_CONFIRM 전부 해소. 로컬 프리뷰 렌더 검증 후 push(자동 재배포)
 - 남은 사용자 입력: 연구진 사진/캐리커처 4점, 파비콘 단순화 시안 여부
+
+### 11차 작업 — 섹션 간격 축소 + 한/영 언어 토글(영어 버전)
+- **목표**: 섹션 간 여백 축소 + 영어 버전 추가 (사용자 요청)
+- **간격**: `section` 세로 패딩 6rem→3.5rem, `.section-head` 하단 3rem→2rem (섹션 간 체감 여백 약 42% 축소)
+- **i18n 아키텍처**: `assets/data.js`를 `ULSOO_I18N = { ko, en }` 이중 구조로 재작성 (id/key는 언어 공통). 각 언어에 `ui` 객체(섹션 제목·lede·버튼·뱃지·aria 등 26키) 추가
+  - Alpine: `lang` 상태 + `get data()/ui()/navItems()` 게터로 반응형 전환. 헤더에 `.lang-toggle` 버튼(EN↔한국어), localStorage(`ulsooLang`) 지속, `<html lang>` 동기
+  - 정적 HTML 문구 전부 `x-text="ui.*"` 바인딩(KO 기본값 유지), copyEmail 토스트 언어 분기
+  - CDN 폴백도 `ULSOO_I18N[localStorage]` 기반 렌더 + 토글(설정 후 reload) 지원
+  - 영문: 검증 수치 보존, ULSOO 항목 "target/development target" 명시, 연구진 로마자 표기(Lee Jae-ho 등)
+- **루프 중 수정한 버그 3건**:
+  1. KPI/성과 카운트업이 프리뷰 환경에서 IntersectionObserver 초기 콜백 미발화 → 스크롤 위치 기반(getBoundingClientRect + scroll 이벤트) 트리거로 교체
+  2. 스크롤 리빌도 동일 IO 이슈로 `.reveal`이 opacity:0에 잔류 → 스크롤 위치 기반 reveal로 교체(실브라우저·프리뷰·폴백 모두 동작)
+  3. EN 폴백에서 실증사례 헤더만 미번역(폴백이 카드 그리드만 재구성) → 헤더 h2/lede도 번역 반영
+- **검증**: KO/EN 전 섹션 전환·카운트업·리빌·라이트박스·언어 지속(리로드)·EN 폴백(헤더 포함) 전부 통과. 금지 문구 0, 핵심 수치 보존
+- **다음 단계**: git push(자동 재배포). 연구진 사진은 여전히 대기
