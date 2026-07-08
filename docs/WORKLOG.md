@@ -122,3 +122,13 @@
 - **루프 중 수정한 버그**: 모바일 1열에서 member-avatar 과대 → max-width 15rem 캡
 - **스펙 정정 노트**: §12-4의 `data.journeys` 표기는 §3 계약의 `journey`로 통일 구현
 - **다음 단계**: git push + GitHub Pages 활성화
+
+### 9차 작업 — GitHub Pages 자동 배포 완료 (프로젝트 목표 달성)
+- **목표**: gh CLI 부재 환경에서 Pages 활성화까지 자동 완료
+- **방법**: `.github/workflows/deploy-pages.yml` 추가 — `actions/configure-pages@v5`의 `enablement: true`로 첫 실행 시 Pages 자동 활성화, `upload-pages-artifact`+`deploy-pages`로 배포 (커밋 1613a39)
+- **검증**:
+  - Actions 첫 실행 `completed success`
+  - 공개 URL `https://kimheekwon.github.io/ULSOO-Heritage-AI/` → HTTP 200 (74KB), 타이틀 정상
+  - 핵심 애셋 4종(data.js·case-banga.webp·og-cover.webp·favicon.svg) 전부 200
+- **상태**: 홈페이지 공개 서비스 개시. 이후 main push만으로 자동 재배포됨
+- **남은 항목 (사용자 입력 필요)**: ① 연구진 사진/캐리커처 4점 (`assets/members/member-01~04.webp`, 배치 즉시 자동 반영 — 현재 이니셜 아바타) ② 박찬우·백서현 직급 확정 (data.js `role` 필드) ③ 파비콘 단순화 시안 채택 여부
