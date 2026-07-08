@@ -196,7 +196,7 @@ const ULSOO_I18N = {
       { name: "이재호", role: "연구책임자 · 책임연구원", inst: "ETRI 한국전자통신연구원", img: "assets/members/member-01.webp", tags: ["연구 총괄", "디지털 헤리티지", "지능형 플랫폼"], email: "jhlee3@etri.re.kr" },
       { name: "김희권", role: "선임연구원", inst: "ETRI 한국전자통신연구원", img: "assets/members/member-02.webp", tags: ["AI 아키텍처", "RAG·지식그래프", "데이터 패브릭"], email: "hkkim79@etri.re.kr" },
       { name: "박찬우", role: "책임연구원", inst: "ETRI 한국전자통신연구원", img: "assets/members/member-03.webp", tags: ["응용 시스템", "디지털 문화유산 생성"], email: "gamer@etri.re.kr" },
-      { name: "백서현", role: "박사후연구원(Post-Doc)", inst: "ETRI 한국전자통신연구원", img: "assets/members/member-04.webp", tags: ["문화보존과학", "AI 기반 문화유산 복원·생성"], email: "b_seohy@etri.re.kr" }
+      { name: "백서현", role: "박사후연구원(Post-Doc)", inst: "ETRI 한국전자통신연구원", img: "assets/members/member-04.webp", tags: ["문화유산보존과학", "AI 기반 문화유산 복원·생성"], email: "b_seohy@etri.re.kr" }
     ],
 
     network: {
@@ -400,7 +400,7 @@ const ULSOO_I18N = {
       { name: "Lee Jae-ho", role: "Principal Investigator · Principal Researcher", inst: "ETRI", img: "assets/members/member-01.webp", tags: ["Research Lead", "Digital Heritage", "Intelligent Platform"], email: "jhlee3@etri.re.kr" },
       { name: "Kim Hee-kwon", role: "Senior Researcher", inst: "ETRI", img: "assets/members/member-02.webp", tags: ["AI Architecture", "RAG · Knowledge Graph", "Data Fabric"], email: "hkkim79@etri.re.kr" },
       { name: "Park Chan-woo", role: "Principal Researcher", inst: "ETRI", img: "assets/members/member-03.webp", tags: ["Applied Systems", "Digital Heritage Creation"], email: "gamer@etri.re.kr" },
-      { name: "Baek Seo-hyun", role: "Postdoctoral Researcher", inst: "ETRI", img: "assets/members/member-04.webp", tags: ["Conservation Science", "AI Heritage Restoration"], email: "b_seohy@etri.re.kr" }
+      { name: "Baek Seo-hyun", role: "Postdoctoral Researcher", inst: "ETRI", img: "assets/members/member-04.webp", tags: ["Heritage Conservation Science", "AI Heritage Restoration"], email: "b_seohy@etri.re.kr" }
     ],
 
     network: {
