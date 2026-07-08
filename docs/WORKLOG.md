@@ -132,3 +132,8 @@
   - 핵심 애셋 4종(data.js·case-banga.webp·og-cover.webp·favicon.svg) 전부 200
 - **상태**: 홈페이지 공개 서비스 개시. 이후 main push만으로 자동 재배포됨
 - **남은 항목 (사용자 입력 필요)**: ① 연구진 사진/캐리커처 4점 (`assets/members/member-01~04.webp`, 배치 즉시 자동 반영 — 현재 이니셜 아바타) ② 박찬우·백서현 직급 확정 (data.js `role` 필드) ③ 파비콘 단순화 시안 채택 여부
+
+### 10차 작업 — 연구진 직급 확정 반영
+- 박찬우: 연구원 → **책임연구원** / 백서현: 연구원 → **박사후연구원(Post-Doc)** (사용자 확정)
+- data.js·IMPLEMENTATION_SPEC §3·CONTENT_SPEC §7 동기 갱신, 직급 TODO_CONFIRM 전부 해소. 로컬 프리뷰 렌더 검증 후 push(자동 재배포)
+- 남은 사용자 입력: 연구진 사진/캐리커처 4점, 파비콘 단순화 시안 여부

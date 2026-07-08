@@ -219,8 +219,8 @@
 |---|---|---|---|---|---|---|
 | 1 | `이재호` | `연구책임자 · 책임연구원` | `ETRI 한국전자통신연구원` | `연구 총괄` `디지털 헤리티지` `지능형 플랫폼` | `jhlee3@etri.re.kr` | `assets/members/member-01.webp` |
 | 2 | `김희권` | `선임연구원` | `ETRI 한국전자통신연구원` | `AI 아키텍처` `RAG·지식그래프` `데이터 패브릭` | `hkkim79@etri.re.kr` | `member-02.webp` |
-| 3 | `박찬우` | `연구원` (직급 TODO_CONFIRM) | `ETRI 한국전자통신연구원` | `응용 시스템` `디지털 문화유산 생성` | `gamer@etri.re.kr` | `member-03.webp` |
-| 4 | `백서현` | `연구원` (직급 TODO_CONFIRM) | `ETRI 한국전자통신연구원` | `문화보존과학` `AI 기반 문화유산 복원·생성` | `b_seohy@etri.re.kr` | `member-04.webp` |
+| 3 | `박찬우` | `책임연구원` | `ETRI 한국전자통신연구원` | `응용 시스템` `디지털 문화유산 생성` | `gamer@etri.re.kr` | `member-03.webp` |
+| 4 | `백서현` | `박사후연구원(Post-Doc)` | `ETRI 한국전자통신연구원` | `문화보존과학` `AI 기반 문화유산 복원·생성` | `b_seohy@etri.re.kr` | `member-04.webp` |
 
 이재호 카드만 골드 테두리+글로우 강조.
 

@@ -234,13 +234,13 @@ const ULSOO_DATA = {
       email: "hkkim79@etri.re.kr"
     },
     {
-      name: "박찬우", role: "연구원", inst: "ETRI 한국전자통신연구원",
+      name: "박찬우", role: "책임연구원", inst: "ETRI 한국전자통신연구원",
       img: "assets/members/member-03.webp",
       tags: ["응용 시스템", "디지털 문화유산 생성"],
       email: "gamer@etri.re.kr"
     },
     {
-      name: "백서현", role: "연구원", inst: "ETRI 한국전자통신연구원",
+      name: "백서현", role: "박사후연구원(Post-Doc)", inst: "ETRI 한국전자통신연구원",
       img: "assets/members/member-04.webp",
       tags: ["문화보존과학", "AI 기반 문화유산 복원·생성"],
       email: "b_seohy@etri.re.kr"
